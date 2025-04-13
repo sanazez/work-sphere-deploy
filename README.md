@@ -42,31 +42,36 @@ docker-compose up -d
 ```mermaid
 graph TD
     A[API Gateway] --> B[Auth Service]
-    A --> C[Task Service]
-    A --> D[Notification Service]
-    B --> E[(PostgreSQL)]
-    C --> F[(MongoDB)]
-    C --> G[[RabbitMQ]]
-    G --> D
+    A --> C[Project Service]
+    A --> D[Task Service]
+    A --> E[Comment Service]
+    B --> F[(PostgreSQL)]
+    C --> F
+    D --> F
+    E --> G[(MongoDB)]
+    C --> H[[RabbitMQ]]
+    D --> H
+    E --> H
+    H --> I[Notification Service]
 ```
 
 ## ⚙️ Management Commands
 
 ### Core commands
 
-# View logs (all services)
+### View logs (all services)
 
 docker-compose logs -f
 
-# View specific service logs
+### View specific service logs
 
 docker-compose logs -f rabbitmq
 
-# Stop all services
+### Stop all services
 
 docker-compose down
 
-# Restart specific service
+### Restart specific service
 
 docker-compose restart api-gateway
 
