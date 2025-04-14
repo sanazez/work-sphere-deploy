@@ -3,6 +3,24 @@ version: '3.8'
 # Infrastructure
 
 services:
+  api-gateway:
+    image: sanazez/work-sphere-api-gateway:latest
+    container_name: work-sphere-api
+    env_file: .env
+    ports:
+      - "3000:3000"
+    environment:
+      RABBITMQ_HOST: ${RABBITMQ_HOST:-rabbitmq}
+      RABBITMQ_PORT: ${RABBITMQ_PORT:-5672}
+      RABBITMQ_USER: ${RABBITMQ_USER:-admin}
+      RABBITMQ_PASS: ${RABBITMQ_PASS:-password}
+      RABBITMQ_VHOST: ${RABBITMQ_VHOST:-/work_sphere_default}
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+    networks:
+      - backend
+
   rabbitmq:
     container_name: worksphere_rabbitmq
     image: rabbitmq:4.0.8-management
