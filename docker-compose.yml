@@ -1,7 +1,3 @@
-version: '3.8'
-
-# Infrastructure
-
 services:
   redis:
     container_name: worksphere_redis
