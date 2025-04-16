@@ -23,4 +23,4 @@ jobs:
             docker pull sanazez/work-sphere-api-gateway:latest
             docker-compose up -d --remove-orphans
             sleep 10  # Даём время на запуск
-            curl -f http://localhost:3000/health || exit 1
+            curl -f http://localhost:30002/health || exit 1
