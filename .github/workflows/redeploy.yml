@@ -1,0 +1,26 @@
+name: Redeploy on Push to Main
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  redeploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Redeploy to Server
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            cd work-sphere-deploy
+            git pull origin main
+            docker-compose down
+            docker pull sanazez/work-sphere-api-gateway:latest
+            docker-compose up -d --remove-orphans
+            sleep 10  # Даём время на запуск
+            curl -f http://localhost:3000/health || exit 1

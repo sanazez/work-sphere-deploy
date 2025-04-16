@@ -2,3 +2,5 @@
 *.swp
 /data/
 /backups/
+.idea
+.vscode
