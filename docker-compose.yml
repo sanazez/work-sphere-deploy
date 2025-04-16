@@ -1,6 +1,6 @@
 services:
   api-gateway:
-    image: sanazez/work-sphere-api-gateway:18c3b91de6b0846a5bd1548573e41f8e1c27b097
+    image: sanazez/work-sphere-api-gateway:latest
     container_name: work-sphere-api
     env_file: .env
     ports:
