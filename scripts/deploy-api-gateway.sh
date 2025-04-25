@@ -2,7 +2,7 @@
 
 TAG=$1
 
-cd /path/to/work-sphere-deploy || exit 1
+cd work-sphere-deploy || exit 1
 
 # Update or add WORK_SPHERE_API_GATEWAY_TAG in .env file
 if grep -q "^WORK_SPHERE_API_GATEWAY_TAG=" .env; then
