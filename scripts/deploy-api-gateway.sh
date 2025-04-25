@@ -2,7 +2,7 @@
 
 TAG=$1
 
-cd /path/to/work-sphere-deploy || exit 1
+cd work-sphere-deploy || exit 1
 
 docker pull sanazez/work-sphere-api-gateway:${TAG} || exit 1
 docker stop work-sphere-api || true
