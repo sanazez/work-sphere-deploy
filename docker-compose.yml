@@ -1,7 +1,7 @@
 services:
   api-gateway:
-    image: sanazez/work-sphere-api-gateway:latest
-    container_name: work-sphere-api
+    image: sanazez/work-sphere-api-gateway:${WORK_SPHERE_API_GATEWAY_TAG:-latest}
+    container_name: work-sphere-api-gateway
     env_file: .env
     ports:
       - '3000:3000'
@@ -34,7 +34,7 @@ services:
     networks:
       - backend
     healthcheck:
-      test: ['CMD', 'rabbitmq-diagnostics', 'status']
+      test: [ 'CMD', 'rabbitmq-diagnostics', 'status' ]
       interval: 30s
       timeout: 10s
       retries: 3
