@@ -17,6 +17,24 @@ services:
     networks:
       - backend
 
+  auth-db:
+    image: postgres:15
+    container_name: worksphere_auth_db
+    env_file: .env
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-auth_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-auth_pass}
+      POSTGRES_DB: ${POSTGRES_DB:-auth_db}
+    volumes:
+      - auth_db_data:/var/lib/postgresql/data
+    networks:
+      - backend
+    healthcheck:
+      test: ['CMD', 'pg_isready', '-U', '${POSTGRES_USER:-auth_user}']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
   rabbitmq:
     container_name: worksphere_rabbitmq
     image: rabbitmq:4.0.8-management
